@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title></title>
+    <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:100,200,300,400,500" rel="stylesheet">
+    <link rel="stylesheet" href="lib/styles/main.min.css">
+</head>
+
+<body ng-controller="ShopInventory as inventory">
+    <header>
+      <h1>Shop Inventory</h1>
+      <img src="images/transport.svg" alt="logo">
+      <button ng-click="inventory.languageConverter()">US/UK</button>
+    </header>
+    <form name="shopForm" novalidate ng-submit="shopForm.$valid && inventory.newItem()">
+      <fieldset>
+        <!-- Name -->
+        <label for="name">Name:</label>
+        <input id="name" ng-required="true" ng-model="inventory.name" type="text" placeholder="Name of item...">
+        <!-- Price -->
+        <label for="price">Price:</label>
+        <input id="price" ng-required="true" ng-model="inventory.price" type="text" placeholder="How much...">
+        <!-- Quantity -->
+        <label for="quantity">Quantity:</label>
+        <input id="quantity" ng-required="true" ng-model="inventory.quantity" type="text" placeholder="How many...">
+        <!-- Color -->
+        <label for="color">Color:</label>
+        <input id="color" ng-model="inventory.color" type="text" placeholder="Color of item...">
+        <!-- Price -->
+        <label for="discount">Discount:</label>
+        <input id="discount" ng-model="inventory.discount" type="text" placeholder="Is there a discount...">
+        <input type="submit" ng-disabled="shopForm.$invalid" value="Submit">
+      </fieldset>
+    </form>
+    <div class="container">
+      <table>
+        <tr>
+          <th>
+            <a href="#" ng-click="inventory.orderByField='name'; reverseSort = !reverseSort">
+              <span class="arrow" ng-show="!reverseSort">^</span><span class="arrow" ng-show="reverseSort">v</span>Name:
+            </a>
+          </th>
+          <th>
+            <a href="#" ng-click="orderByField='price'; reverseSort = !reverseSort">
+              <span class="arrow" ng-show="!reverseSort">^</span><span class="arrow" ng-show="reverseSort">v</span>Price:
+            </a>
+          </th>
+          <th>
+            <a href="#" ng-click="orderByField='quantity'; reverseSort = !reverseSort">
+              <span class="arrow" ng-show="!reverseSort">^</span><span class="arrow" ng-show="reverseSort">v</span>Quantity:
+            </a>
+          </th>
+          <th>
+            <a href="#" ng-click="orderByField='color'; reverseSort = !reverseSort">
+              <span class="arrow" ng-show="!reverseSort">^</span><span class="arrow" ng-show="reverseSort">v</span>{{inventory.Color}}:
+            </a>
+          </th>
+        </tr>
+        <tr ng-repeat="item in inventory.totalInventory | orderBy:inventory.orderByField:reverseSort">
+          <th><span>{{item.name}}</span></th>
+          <th>
+            <img ng-show="item.discount" src="images/label.svg">
+            <span>{{inventory.moneySymbol}}{{inventory.showDiscount(item.price, item.discount)}}</span>
+          </th>
+          <th><span>{{item.quantity}}</span></th>
+          <th><span>{{item.color}}</span></th>
+        </tr>
+      </table>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+    <!-- <script src="lib/js/vendor.min.js"></script> -->
+    <script src="lib/js/app.js"></script>
+</body>
+
+</html>
