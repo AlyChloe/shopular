@@ -12,8 +12,11 @@
     <link rel="stylesheet" href="lib/styles/main.min.css">
 </head>
 
-<body ng-controller="ShopInventory as inventory">
+<body ng-controller="ShopInventory as inventory" ng-cloak>
     <header>
+      <nav ng-controller="userController as user">
+        <h3>Hello, {{user.name}} <span>{{user.time()}}</span></h3>
+      </nav>
       <h1>Shop Inventory</h1>
       <img src="images/transport.svg" alt="logo">
       <button ng-click="inventory.languageConverter()">US/UK</button>
@@ -76,9 +79,14 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+    <script src="./node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <!-- <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script> -->
     <!-- <script src="lib/js/vendor.min.js"></script> -->
-    <script src="lib/js/app.js"></script>
+    <!-- <script src="lib/js/app.js"></script> -->
+    <script src="src/js/app.js"></script>
+    <script src="src/js/controllers/storage.js"></script>
+    <script src="src/js/allInventoryService.js"></script>
+    <script src="src/js/controllers/user.js"></script>
 </body>
 
 </html>

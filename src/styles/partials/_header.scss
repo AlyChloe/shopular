@@ -6,6 +6,20 @@ body {
     float: left;
     width: 50%;
 
+    nav {
+      h3 {
+        padding-bottom: 15px;
+
+        span {
+          margin-left: 10px;
+          font-size: 14px;
+          font-weight: 100;
+          color: #aaa;
+        }
+      }
+
+    }
+
     img {
       width: 100px;
     }
